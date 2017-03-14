@@ -13,6 +13,7 @@ module.exports = function(app) {
                 firstname: "minibean",
                 email: "",
                 mobile: "",
+                active: true,
                 created_date: new Date()
             }
         ];
