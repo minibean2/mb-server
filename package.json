@@ -1,21 +1,21 @@
 {
-  "name": "mb-web",
+  "name": "mb-server",
   "version": "1.0.0",
-  "description": "minibean Web",
+  "description": "minibean Server",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/minibean2/mb-web.git"
+    "url": "https://github.com/minibean2/mb-server.git"
   },
   "author": "keithlei",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/minibean2/mb-web/issues"
+    "url": "https://github.com/minibean2/mb-server/issues"
   },
-  "homepage": "https://github.com/minibean2/mb-web",
+  "homepage": "https://github.com/minibean2/mb-server",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.1",
