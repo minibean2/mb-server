@@ -4,6 +4,7 @@
 */
 
 var categories = require("../models/categoryModel");
+var jwt    = require('jsonwebtoken');
 
 module.exports = function(app) {
 
@@ -12,17 +13,23 @@ module.exports = function(app) {
 	*/
 	app.get("/api/categories", function(req, res) {
 		res.header("Access-Control-Allow-Origin", "*");
-		categories.find({}, function(err, results){
-			if(err){
-				res.send(500,{error: err});
-			}
-			var data = {
-                statusCode : "200",
-                res        : results,
-                message    : "categories"
-            }
-			res.send(results);
-		})
+		var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    	jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+    		if (err) {
+        		return res.status(500).send("invalid token");
+      		} 
+			categories.find({}, function(err, results){
+				if(err){
+					res.status(500).send(err);
+				}
+				var data = {
+                	statusCode : "200",
+                	res        : results,
+                	message    : "categories"
+            	}
+				res.send(results);
+			})
+		});
 	});
 
 }
