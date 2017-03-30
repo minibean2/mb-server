@@ -17,10 +17,10 @@ module.exports = function(app) {
 		var start = parseInt(req.param('start'));
 		var end   = parseInt(req.param('end'));
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    	jwt.verify(token, app.get('superSecret'), function(err, decoded) { 
+    	/*jwt.verify(token, app.get('superSecret'), function(err, decoded) { 
     		if (err) {
         		return res.status(500).send("invalid token");
-      		}
+      		}*/
 			articles.find({},null,{
          		skip: start,
          		limit: end
@@ -35,7 +35,7 @@ module.exports = function(app) {
             	}
 				res.send(data);
 			})
-		});
+		//});
 	})
 
 	/*Created By Vinod
@@ -44,10 +44,10 @@ module.exports = function(app) {
 	app.get("/api/article", function(req, res){
 		res.header("Access-Control-Allow-Origin", "*");
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    	jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+    	/*jwt.verify(token, app.get('superSecret'), function(err, decoded) {
     		if (err) {
         		return res.status(500).send("invalid token");
-      		} 
+      		}*/ 
 			articles.findById(req.param('articleId'), function(err, result){
 				if(err){
 					res.status(500).send(err);
@@ -60,7 +60,7 @@ module.exports = function(app) {
 
             	res.send(data);
 			});
-		});	
+		//});	
 	});
 
 	/*Created By Vinod
@@ -70,10 +70,10 @@ module.exports = function(app) {
 		res.header("Access-Control-Allow-Origin", "*");
 		var article = req.body;
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    	jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+    	/*jwt.verify(token, app.get('superSecret'), function(err, decoded) {
     		if (err) {
         		return res.status(500).send("invalid token");
-      		} 
+      		} */
 			articles.create(article, function(err, result) {
             	if(err){
 					res.status(500).send(err);
@@ -86,7 +86,7 @@ module.exports = function(app) {
 
             	res.send(data);
         	})
-		});
+		//});
 	});
 
 	/*Created By Vinod
@@ -96,10 +96,10 @@ module.exports = function(app) {
 		res.header("Access-Control-Allow-Origin", "*");
 		var categoryId = req.params.categoryId;
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    	jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+    	/*jwt.verify(token, app.get('superSecret'), function(err, decoded) {
     		if (err) {
         		return res.status(500).send("invalid token");
-      		} 
+      		} */
 			articles.find({CategoryId:categoryId}, function(err, results){
 				if(err){
 					res.status(500).send(err);
@@ -111,6 +111,6 @@ module.exports = function(app) {
             	}
 				res.send(data);
 			})
-		});
+		//});
 	});
 }

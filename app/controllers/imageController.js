@@ -14,10 +14,10 @@ module.exports = function(app) {
 	app.post("/api/image/upload", function(req, res){
 		res.header("Access-Control-Allow-Origin", "*");
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    	jwt.verify(token, app.get('superSecret'), function(err, decoded) { 
+    	/*jwt.verify(token, app.get('superSecret'), function(err, decoded) { 
     		if (err) {
         		return res.status(500).send("invalid token");
-      		}
+      		}*/
 			if (!req.files)
     			return res.status(400).send('No files were uploaded.');
     		let sampleFile = req.files.file;
@@ -29,7 +29,7 @@ module.exports = function(app) {
       				res.send(result);
       			});
   			});
-    	});
+    	//});
 	});
 
 	app.get("/images/:imageName", function(req, res){

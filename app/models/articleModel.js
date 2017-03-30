@@ -7,7 +7,8 @@ var articleSchema = new Schema({
     description : String,
     images      : Array,
     CategoryId  : String,
-    body		: String
+    imageURL    : String,
+    body        : String
 
 });
 
