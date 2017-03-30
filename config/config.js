@@ -7,7 +7,11 @@ module.exports = {
     },
 
     getSecret : function() {
-    	return "mnttoken";
+    	return "mbToken";
+    },
+
+    getAppDefaultPort : function() {
+        return 3001;
     }
 
 }

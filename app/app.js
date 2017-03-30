@@ -4,14 +4,14 @@ var mongoose = require("mongoose");
 var config = require("../config/config");
 var bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
-var jwt    = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
 
 var initController = require("./controllers/initController");
 var categoryController = require("./controllers/categoryController");
 var articleController = require("./controllers/articleController");
 var imageController = require("./controllers/imageController");
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || config.getAppDefaultPort();
 
 app.use("/assets", express.static(__dirname + "/public"));
 
