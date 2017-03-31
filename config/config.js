@@ -11,7 +11,7 @@ module.exports = {
     },
 
     getAppDefaultPort : function() {
-        return 3001;
+        return 9000;
     }
 
 }

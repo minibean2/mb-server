@@ -100,7 +100,7 @@ module.exports = function(app) {
     		if (err) {
         		return res.status(500).send("invalid token");
       		} */
-			articles.find({CategoryId:categoryId}, function(err, results){
+			articles.find({categoryId:categoryId}, function(err, results){
 				if(err){
 					res.status(500).send(err);
 				}

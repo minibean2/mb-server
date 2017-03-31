@@ -6,10 +6,10 @@ var articleSchema = new Schema({
     articleName : String,
     description : String,
     images      : Array,
-    CategoryId  : String,
+    categoryId  : String,
     imageURL    : String,
-    body        : String
-
+    body        : String,
+    created_date: Date
 });
 
 var articles = mongoose.model("articles", articleSchema);

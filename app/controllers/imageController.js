@@ -22,9 +22,14 @@ module.exports = function(app) {
     			return res.status(400).send('No files were uploaded.');
     		let sampleFile = req.files.file;
     		sampleFile.mv(__dirname + '/images/'+sampleFile.name, function(err) {
-    			if (err)
-      				return res.status(500).send(err);
-      			images.create({url: '/images/'+sampleFile.name}, function(err, result){
+    			if (err) {
+    				return res.status(500).send(err);
+                }
+                var image = {
+    				url: '/images/'+sampleFile.name,
+					created_date: new Date()
+    			};
+      			images.create(image, function(err, result){
       				if(err) return res.status(500).send(err);
       				res.send(result);
       			});
