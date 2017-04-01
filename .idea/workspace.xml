@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a51afe3-b363-4f43-a44b-76e4c0ebbf45" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/adminController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.js" afterPath="$PROJECT_DIR$/app/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/articleController.js" afterPath="$PROJECT_DIR$/app/controllers/articleController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/categoryController.js" afterPath="$PROJECT_DIR$/app/controllers/categoryController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/imageController.js" afterPath="$PROJECT_DIR$/app/controllers/imageController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/initController.js" afterPath="$PROJECT_DIR$/app/controllers/initController.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -31,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/app/controllers/initController.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -76,14 +70,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="imageController.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="imageController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/imageController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding>
-                <marker date="1491019887000" expanded="false" signature="0:55" ph="/*...*/" />
-              </folding>
+            <state relative-caret-position="240">
+              <caret line="19" column="43" lean-forward="false" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="articleModel.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/articleModel.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="articleController.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/articleController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="24" column="24" lean-forward="false" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -103,6 +115,8 @@
       <find>categoryId</find>
       <find>url</find>
       <find>token</find>
+      <find>articale</find>
+      <find>end</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -118,12 +132,12 @@
         <option value="$PROJECT_DIR$/app/models/categoryModel.js" />
         <option value="$PROJECT_DIR$/app/models/articleModel.js" />
         <option value="$PROJECT_DIR$/app/models/imagesModel.js" />
-        <option value="$PROJECT_DIR$/app/controllers/articleController.js" />
         <option value="$PROJECT_DIR$/app/controllers/categoryController.js" />
         <option value="$PROJECT_DIR$/app/controllers/adminController.js" />
         <option value="$PROJECT_DIR$/app/controllers/initController.js" />
         <option value="$PROJECT_DIR$/app/controllers/imageController.js" />
         <option value="$PROJECT_DIR$/app/app.js" />
+        <option value="$PROJECT_DIR$/app/controllers/articleController.js" />
       </list>
     </option>
   </component>
@@ -276,6 +290,7 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -350,18 +365,26 @@
       <workItem from="1489501690690" duration="996000" />
       <workItem from="1490708573629" duration="1008000" />
       <workItem from="1490709965842" duration="2000" />
-      <workItem from="1490719457520" duration="4443000" />
+      <workItem from="1490719457520" duration="7172000" />
     </task>
+    <task id="LOCAL-00001" summary="Delete node_modules">
+      <created>1491023487621</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1491023487621</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6449000" />
+    <option name="totallyTimeSpent" value="9178000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="25" y="23" width="1295" height="833" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23011583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23011583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38219896" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -385,6 +408,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Delete node_modules" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete node_modules" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -511,14 +538,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/articleController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/categoryController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -547,7 +566,7 @@
     <entry file="file://$PROJECT_DIR$/app/controllers/initController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -576,16 +595,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/articleModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding>
-            <marker date="1490983993000" expanded="true" signature="99:280" ph="{&quot;articleName&quot;: String...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -604,11 +613,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/imageController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <marker date="1491019887000" expanded="false" signature="0:55" ph="/*...*/" />
-          </folding>
+        <state relative-caret-position="240">
+          <caret line="19" column="43" lean-forward="false" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/articleModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/articleController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="24" column="24" lean-forward="false" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
