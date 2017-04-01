@@ -4,7 +4,6 @@
 */
 
 var images = require("../models/imagesModel");
-var jwt    = require('jsonwebtoken');
 
 module.exports = function(app) {
 
@@ -13,27 +12,35 @@ module.exports = function(app) {
 	*/
 	app.post("/api/image/upload", function(req, res){
 		res.header("Access-Control-Allow-Origin", "*");
+
+        /*
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    	/*jwt.verify(token, app.get('superSecret'), function(err, decoded) { 
-    		if (err) {
-        		return res.status(500).send("invalid token");
-      		}*/
-			if (!req.files)
-    			return res.status(400).send('No files were uploaded.');
-    		let sampleFile = req.files.file;
-    		sampleFile.mv(__dirname + '/images/'+sampleFile.name, function(err) {
-    			if (err) {
-    				return res.status(500).send(err);
-                }
-                var image = {
-    				url: '/images/'+sampleFile.name,
-					created_date: new Date()
-    			};
-      			images.create(image, function(err, result){
-      				if(err) return res.status(500).send(err);
-      				res.send(result);
-      			});
-  			});
+		jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+		    if (err) {
+		        return res.status(500).send("invalid token");
+		    }
+		}
+    	*/
+
+    	if (!req.files) {
+            return res.status(400).send('No files were uploaded.');
+        }
+
+        let sampleFile = req.files.file;
+        sampleFile.mv(__dirname + '/images/'+sampleFile.name, function(err) {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            var image = {
+                url: '/images/'+sampleFile.name,
+                created_date: new Date()
+            };
+            images.create(image, function(err, result){
+                if(err) return res.status(500).send(err);
+                res.send(result);
+            });
+        });
+
     	//});
 	});
 

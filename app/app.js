@@ -4,9 +4,9 @@ var mongoose = require("mongoose");
 var config = require("../config/config");
 var bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
-var jwt = require('jsonwebtoken');
 
 var initController = require("./controllers/initController");
+var adminController = require("./controllers/adminController");
 var categoryController = require("./controllers/categoryController");
 var articleController = require("./controllers/articleController");
 var imageController = require("./controllers/imageController");

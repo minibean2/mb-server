@@ -4,7 +4,6 @@
 */
 
 var categories = require("../models/categoryModel");
-var jwt    = require('jsonwebtoken');
 
 module.exports = function(app) {
 

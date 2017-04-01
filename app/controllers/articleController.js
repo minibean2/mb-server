@@ -4,7 +4,6 @@
 */
 
 var articles = require("../models/articleModel");
-var jwt    = require('jsonwebtoken');
 
 module.exports = function(app) {
 
