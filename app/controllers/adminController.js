@@ -1,4 +1,5 @@
-var jwt    = require('jsonwebtoken');
+var Users = require("../models/userModel");
+var jwt = require('jsonwebtoken');
 
 module.exports = function(app) {
 

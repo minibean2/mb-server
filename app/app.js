@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true ,limit: '50mb'}));
 mongoose.connect(config.getDbConnectionString());
 
 initController(app);
+adminController(app);
 categoryController(app);
 articleController(app);
 imageController(app);
