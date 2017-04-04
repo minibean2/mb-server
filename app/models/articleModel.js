@@ -5,12 +5,11 @@ var Schema = mongoose.Schema;
 var articleSchema = new Schema({
     title : String,
     preview : String,
-    images : Array,
     category : Object,
-    categoryId: String,
-    imageURL : String,
+    thumbnailUrl : String,
+    imageUrl : String,
     body : String,
-    status: Boolean,
+    published: Boolean,
     featured: Boolean,
     created_date : Date
 });
