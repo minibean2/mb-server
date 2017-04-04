@@ -6,9 +6,12 @@ var articleSchema = new Schema({
     title : String,
     preview : String,
     images : Array,
-    categoryId : String,
+    category : Object,
+    categoryId: String,
     imageURL : String,
     body : String,
+    status: Boolean,
+    featured: Boolean,
     created_date : Date
 });
 

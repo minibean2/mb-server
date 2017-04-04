@@ -112,4 +112,26 @@ module.exports = function (app) {
         })
         //});
     });
+
+    /*Created By Vinod
+     Delete article by id
+    */
+
+    app.get("/api/article/delete/:articleId", function (req, res) {
+        res.header("Access-Control-Allow-Origin", "*");
+        var articleId = req.params.articleId;
+
+        articles.remove({"_id":articleId}, function(err, result){
+            if (err) {
+                res.status(500).send(err);
+            }
+            var data = {
+                statusCode: "200",
+                res: result,
+                message: "delete article"
+            }
+            res.send(data);
+        });
+
+    });
 }
