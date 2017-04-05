@@ -68,6 +68,11 @@ module.exports = function (app) {
     app.post("/api/article/save", function (req, res) {
         res.header("Access-Control-Allow-Origin", "*");
         var article = req.body;
+
+        if(article.post_date == undefined || article.post_date == ''){
+            article.post_date = new Date();
+        }
+        
         var token = req.body.token || req.query.token || req.headers['x-access-token'];
         /*jwt.verify(token, app.get('superSecret'), function(err, decoded) {
          if (err) {

@@ -12,6 +12,7 @@ var articleSchema = new Schema({
     body : String,
     status: Boolean,
     featured: Boolean,
+    post_date: Date,
     created_date : Date
 });
 
