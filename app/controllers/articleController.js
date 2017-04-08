@@ -15,7 +15,7 @@ module.exports = function (app) {
 
         var start = parseInt(req.param('start'));
         var limit = parseInt(req.param('limit'));
-        var token = req.body.token || req.query.token || req.headers['x-access-token'];
+        //var token = req.body.token || req.query.token || req.headers['x-access-token'];
         /*jwt.verify(token, app.get('superSecret'), function(err, decoded) {
          if (err) {
          return res.status(500).send("invalid token");
@@ -24,7 +24,7 @@ module.exports = function (app) {
             skip: start,
             limit: limit,
             sort:{
-                post_date: -1 //Sort by Date Added DESC
+                created_date: -1 //Sort by Date Added DESC
             }
         }, function (err, results) {
             if (err) {
@@ -45,7 +45,7 @@ module.exports = function (app) {
      */
     app.get("/api/article", function (req, res) {
         res.header("Access-Control-Allow-Origin", "*");
-        var token = req.body.token || req.query.token || req.headers['x-access-token'];
+        //var token = req.body.token || req.query.token || req.headers['x-access-token'];
         /*jwt.verify(token, app.get('superSecret'), function(err, decoded) {
          if (err) {
          return res.status(500).send("invalid token");
@@ -76,7 +76,7 @@ module.exports = function (app) {
             article.post_date = new Date();
         }
         
-        var token = req.body.token || req.query.token || req.headers['x-access-token'];
+        //var token = req.body.token || req.query.token || req.headers['x-access-token'];
         /*jwt.verify(token, app.get('superSecret'), function(err, decoded) {
          if (err) {
          return res.status(500).send("invalid token");
@@ -102,7 +102,7 @@ module.exports = function (app) {
     app.get("/api/article/category/:categoryId", function (req, res) {
         res.header("Access-Control-Allow-Origin", "*");
         var categoryId = req.params.categoryId;
-        var token = req.body.token || req.query.token || req.headers['x-access-token'];
+        //var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
         /*jwt.verify(token, app.get('superSecret'), function(err, decoded) {
          if (err) {

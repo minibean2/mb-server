@@ -12,7 +12,7 @@ module.exports = function (app) {
      */
     app.get("/api/categories", function (req, res) {
         res.header("Access-Control-Allow-Origin", "*");
-        var token = req.body.token || req.query.token || req.headers['x-access-token'];
+        //var token = req.body.token || req.query.token || req.headers['x-access-token'];
         /*jwt.verify(token, app.get('superSecret'), function(err, decoded) {
          if (err) {
          return res.status(500).send("invalid token");
