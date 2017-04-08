@@ -22,7 +22,10 @@ module.exports = function (app) {
          }*/
         articles.find({}, null, {
             skip: start,
-            limit: limit
+            limit: limit,
+            sort:{
+                post_date: -1 //Sort by Date Added DESC
+            }
         }, function (err, results) {
             if (err) {
                 res.status(500).send(err);
@@ -122,7 +125,6 @@ module.exports = function (app) {
     /*Created By Vinod
      Delete article by id
      */
-
     app.get("/api/article/delete/:articleId", function (req, res) {
         res.header("Access-Control-Allow-Origin", "*");
         var articleId = req.params.articleId;
@@ -140,4 +142,24 @@ module.exports = function (app) {
         });
 
     });
+
+    /*Created by Vinod
+      Update featured
+    */
+    app.post("/api/update/featured", function (req, res) {
+       res.header("Access-Control-Allow-Origin", "*"); 
+       var obj = req.body;
+       var article = obj.articles;
+       articles.update({}, {featured:false}, { multi: true },
+            function(err, num) {
+                var count = article.length - 1;
+                for(var i=0;i<article.length;i++){
+                    articles.update({"_id":article[i]}, {featured:true}, { multi: false },
+                        function(err, num) {
+                            res.send("update record...");
+                        });
+                }
+            });
+    });
+
 }
