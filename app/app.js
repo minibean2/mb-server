@@ -1,9 +1,12 @@
 var express = require("express");
 var app = express();
-var mongoose = require("mongoose");
+
 var config = require("../config/config");
 var bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
+
+// database
+var db = require("../config/db");
 
 var initController = require("./controllers/initController");
 var adminController = require("./controllers/adminController");
@@ -21,8 +24,6 @@ app.set('superSecret', config.getSecret());
 app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true ,limit: '50mb'}));
-
-mongoose.connect(config.getDbConnectionString());
 
 initController(app);
 adminController(app);
