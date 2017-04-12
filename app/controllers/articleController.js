@@ -16,8 +16,8 @@ module.exports = function (app) {
         articles.find({}, null, {
             skip: start,
             limit: limit,
-            sort:{
-                created_date: -1 
+            sort: {
+                post_date: -1
             }
         }, function (err, results) {
             if (err) {
@@ -56,10 +56,10 @@ module.exports = function (app) {
     app.post("/api/article/save", function (req, res) {
         var article = req.body;
 
-        if(article.post_date == undefined || article.post_date == ''){
+        if (article.post_date == undefined || article.post_date == '') {
             article.post_date = new Date();
         }
-        
+
         articles.create(article, function (err, result) {
             if (err) {
                 res.status(500).send(err);
@@ -79,8 +79,8 @@ module.exports = function (app) {
      */
     app.get("/api/article/category/:categoryId", function (req, res) {
         var categoryId = req.params.categoryId;
-        
-        articles.find({"category.id": categoryId}, function (err, results) {
+
+        articles.find({ "category.id": categoryId }, function (err, results) {
             if (err) {
                 res.status(500).send(err);
             }
@@ -99,7 +99,7 @@ module.exports = function (app) {
     app.get("/api/article/delete/:articleId", function (req, res) {
         var articleId = req.params.articleId;
 
-        articles.remove({"_id": articleId}, function (err, result) {
+        articles.remove({ "_id": articleId }, function (err, result) {
             if (err) {
                 res.status(500).send(err);
             }
@@ -117,26 +117,26 @@ module.exports = function (app) {
       Update featured
     */
     app.post("/api/update/featured", function (req, res) {
-       //res.header("Access-Control-Allow-Origin", "*");
-       res.setHeader("Access-Control-Allow-Origin", "*") 
-       var obj = req.body;
-       var article = obj.articles;
-       articles.update({}, {featured:false}, { multi: true },
-            function(err, num) {
-                if(article.length == 0){
+        //res.header("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Origin", "*")
+        var obj = req.body;
+        var article = obj.articles;
+        articles.update({}, { featured: false }, { multi: true },
+            function (err, num) {
+                if (article.length == 0) {
                     res.send("no record to update");
                 }
                 var count = article.length;
                 var length = 0;
 
-                for(var i=0;i<article.length;i++){
+                for (var i = 0; i < article.length; i++) {
                     length++;
-                    articles.update({"_id":article[i]}, {featured:true}, { multi: false },
-                        function(err, num) {
-                            if(length == count){
+                    articles.update({ "_id": article[i] }, { featured: true }, { multi: false },
+                        function (err, num) {
+                            if (length == count) {
                                 res.send("update record...");
                             }
-                    });
+                        });
                 }
             });
     });
