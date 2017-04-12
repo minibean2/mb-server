@@ -1,4 +1,5 @@
 var express = require("express");
+var cors = require('cors')
 var app = express();
 
 var config = require("../config/config");
@@ -16,6 +17,7 @@ var imageController = require("./controllers/imageController");
 
 var port = process.env.PORT || config.getAppDefaultPort();
 
+app.use(cors());
 app.use("/assets", express.static(__dirname + "/public"));
 
 app.set("view engine", "ejs");

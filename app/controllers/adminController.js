@@ -14,8 +14,6 @@ module.exports = function(app) {
             login    : req.param('username'),
             password : req.param('password')
         }
-
-        res.header("Access-Control-Allow-Origin", "*");
         Users.find(user, function(err, results){
             if(err){
                 res.send(500, { error: err });

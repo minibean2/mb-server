@@ -11,20 +11,13 @@ module.exports = function (app) {
      Get articles
      */
     app.get("/api/articles", function (req, res) {
-        res.header("Access-Control-Allow-Origin", "*");
-
         var start = parseInt(req.param('start'));
         var limit = parseInt(req.param('limit'));
-        //var token = req.body.token || req.query.token || req.headers['x-access-token'];
-        /*jwt.verify(token, app.get('superSecret'), function(err, decoded) {
-         if (err) {
-         return res.status(500).send("invalid token");
-         }*/
         articles.find({}, null, {
             skip: start,
             limit: limit,
             sort:{
-                created_date: -1 //Sort by Date Added DESC
+                created_date: -1 
             }
         }, function (err, results) {
             if (err) {
@@ -36,20 +29,13 @@ module.exports = function (app) {
                 message: "Articles"
             }
             res.send(data);
-        })
-        //});
+        });
     })
 
     /*Created By Vinod
      Get article by id
      */
     app.get("/api/article", function (req, res) {
-        res.header("Access-Control-Allow-Origin", "*");
-        //var token = req.body.token || req.query.token || req.headers['x-access-token'];
-        /*jwt.verify(token, app.get('superSecret'), function(err, decoded) {
-         if (err) {
-         return res.status(500).send("invalid token");
-         }*/
         articles.findById(req.param('articleId'), function (err, result) {
             if (err) {
                 res.status(500).send(err);
@@ -62,25 +48,18 @@ module.exports = function (app) {
 
             res.send(data);
         });
-        //});
     });
 
     /*Created By Vinod
      Save article
      */
     app.post("/api/article/save", function (req, res) {
-        res.header("Access-Control-Allow-Origin", "*");
         var article = req.body;
 
         if(article.post_date == undefined || article.post_date == ''){
             article.post_date = new Date();
         }
         
-        //var token = req.body.token || req.query.token || req.headers['x-access-token'];
-        /*jwt.verify(token, app.get('superSecret'), function(err, decoded) {
-         if (err) {
-         return res.status(500).send("invalid token");
-         } */
         articles.create(article, function (err, result) {
             if (err) {
                 res.status(500).send(err);
@@ -92,22 +71,15 @@ module.exports = function (app) {
             }
 
             res.send(data);
-        })
-        //});
+        });
     });
 
     /*Created By Vinod
      Get article by category id
      */
     app.get("/api/article/category/:categoryId", function (req, res) {
-        res.header("Access-Control-Allow-Origin", "*");
         var categoryId = req.params.categoryId;
-        //var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-        /*jwt.verify(token, app.get('superSecret'), function(err, decoded) {
-         if (err) {
-         return res.status(500).send("invalid token");
-         } */
+        
         articles.find({"category.id": categoryId}, function (err, results) {
             if (err) {
                 res.status(500).send(err);
@@ -118,15 +90,13 @@ module.exports = function (app) {
                 message: "Article by category id"
             }
             res.send(data);
-        })
-        //});
+        });
     });
 
     /*Created By Vinod
      Delete article by id
      */
     app.get("/api/article/delete/:articleId", function (req, res) {
-        res.header("Access-Control-Allow-Origin", "*");
         var articleId = req.params.articleId;
 
         articles.remove({"_id": articleId}, function (err, result) {
