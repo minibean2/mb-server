@@ -117,27 +117,26 @@ module.exports = function (app) {
       Update featured
     */
     app.post("/api/update/featured", function (req, res) {
-        //res.header("Access-Control-Allow-Origin", "*");
-        res.setHeader("Access-Control-Allow-Origin", "*")
-        var obj = req.body;
-        var article = obj.articles;
-        articles.update({}, { featured: false }, { multi: true },
-            function (err, num) {
-                if (article.length == 0) {
+      
+       var obj = req.body;
+       var article = obj.articles;
+       articles.update({}, {featured:false}, { multi: true },
+            function(err, num) {
+                if(article.length == 0){
                     res.send("no record to update");
                 }
                 var count = article.length;
                 var length = 0;
 
-                for (var i = 0; i < article.length; i++) {
+                for(var i=0;i<article.length;i++){
                     length++;
-                    articles.update({ "_id": article[i] }, { featured: true }, { multi: false },
-                        function (err, num) {
-                            if (length == count) {
-                                res.send("update record...");
-                            }
-                        });
+                    articles.update({"_id":article[i]}, {featured:true},
+                        function(err, num) {
+        
+                    });
                 }
+
+                res.send("update record...");
             });
     });
 
