@@ -41,23 +41,31 @@ module.exports = function (app) {
             if (!err && count === 0) {
                 var cats = [
                     {
-                        name: "Baby Shower",
+                        name: "懷孕分娩",
                         created_date: new Date()
                     },
                     {
-                        name: "Education",
+                        name: "育兒資訊",
                         created_date: new Date()
                     },
                     {
-                        name: "Food",
+                        name: "學習教育",
                         created_date: new Date()
                     },
                     {
-                        name: "Sports",
+                        name: "親子生活",
                         created_date: new Date()
                     },
                     {
-                        name: "Books",
+                        name: "娛樂名人",
+                        created_date: new Date()
+                    },
+                    {
+                        name: "增廣見聞",
+                        created_date: new Date()
+                    },
+                    {
+                        name: "女人語",
                         created_date: new Date()
                     }
                 ];
