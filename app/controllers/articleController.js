@@ -78,9 +78,17 @@ module.exports = function (app) {
      Get article by category id
      */
     app.get("/api/article/category/:categoryId", function (req, res) {
+        var start = parseInt(req.param('start'));
+        var limit = parseInt(req.param('limit'));
         var categoryId = req.params.categoryId;
 
-        articles.find({ "category.id": categoryId }, function (err, results) {
+        articles.find({ "category.id": categoryId }, null, {
+            skip: start,
+            limit: limit,
+            sort:{
+                post_date: -1 
+            }
+        }, function (err, results) {
             if (err) {
                 res.status(500).send(err);
             }
@@ -120,10 +128,13 @@ module.exports = function (app) {
       
        var obj = req.body;
        var article = obj.articles;
+       if(!article){
+          article = [];
+       }
        articles.update({}, {featured:false}, { multi: true },
             function(err, num) {
                 if(article.length == 0){
-                    res.send("no record to update");
+                   return res.send("no record to update");
                 }
                 var count = article.length;
                 var length = 0;
@@ -132,7 +143,6 @@ module.exports = function (app) {
                     length++;
                     articles.update({"_id":article[i]}, {featured:true},
                         function(err, num) {
-        
                     });
                 }
 
