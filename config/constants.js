@@ -1,0 +1,5 @@
+module.exports = Object.freeze({
+    CATEGORY_TYPE_ALL: "ALL",
+    CATEGORY_TYPE_CATEGORY: "CATEGORY",
+    CATEGORY_TYPE_SUBCATEGORY: "SUBCATEGORY",
+});

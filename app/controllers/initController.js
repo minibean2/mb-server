@@ -1,5 +1,6 @@
 var users = require("../models/userModel");
 var categories = require("../models/categoryModel");
+var config = require("../../config/config");
 
 module.exports = function (app) {
 
@@ -42,30 +43,51 @@ module.exports = function (app) {
                 var cats = [
                     {
                         name: "懷孕分娩",
+                        type: constants.CATEGORY_TYPE_CATEGORY,
+                        imageUrl: config.IMAGE_BASE_URL + "懷孕分娩.jpg",
+                        seq: 1,
                         created_date: new Date()
                     },
                     {
                         name: "育兒資訊",
+                        type: constants.CATEGORY_TYPE_CATEGORY,
+                        imageUrl: config.IMAGE_BASE_URL + "育兒資訊.jpg",
+                        seq: 2,
                         created_date: new Date()
                     },
                     {
                         name: "學習教育",
+                        type: constants.CATEGORY_TYPE_CATEGORY,
+                        imageUrl: config.IMAGE_BASE_URL + "學習教育.jpg",
+                        seq: 3,
                         created_date: new Date()
                     },
                     {
                         name: "親子生活",
+                        type: constants.CATEGORY_TYPE_CATEGORY,
+                        imageUrl: config.IMAGE_BASE_URL + "親子生活.jpg",
+                        seq: 4,
                         created_date: new Date()
                     },
                     {
                         name: "娛樂名人",
+                        type: constants.CATEGORY_TYPE_CATEGORY,
+                        imageUrl: config.IMAGE_BASE_URL + "娛樂名人.jpg",
+                        seq: 5,
                         created_date: new Date()
                     },
                     {
                         name: "增廣見聞",
+                        type: constants.CATEGORY_TYPE_CATEGORY,
+                        imageUrl: config.IMAGE_BASE_URL + "增廣見聞.jpg",
+                        seq: 6,
                         created_date: new Date()
                     },
                     {
                         name: "女人語",
+                        type: constants.CATEGORY_TYPE_CATEGORY,
+                        imageUrl: config.IMAGE_BASE_URL + "女人語.jpg",
+                        seq: 7,
                         created_date: new Date()
                     }
                 ];

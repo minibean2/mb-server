@@ -3,7 +3,10 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var categorySchema = new Schema({
-    name : String,
+    name: String,
+    type: String,
+    imageUrl: String,
+    seq: Number,
     created_date: Date
 });
 
