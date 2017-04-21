@@ -1,9 +1,7 @@
 /*Crated By Vinod
  Date-20-03-2017
- Article Controller
+ Search Controller
  */
-
-var articles = require("../models/searchResultModel");
 
 module.exports = function (app) {
 
@@ -11,7 +9,7 @@ module.exports = function (app) {
      Get articles
      */
     app.get("/api/search", function (req, res) {
-        var searchKey = parseInt(req.param('searchKey'));
+        var searchKey = req.param('key');
 
         // TODO - fill in search logic
         var results = [

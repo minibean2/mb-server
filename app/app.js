@@ -13,6 +13,7 @@ var initController = require("./controllers/initController");
 var adminController = require("./controllers/adminController");
 var categoryController = require("./controllers/categoryController");
 var articleController = require("./controllers/articleController");
+var searchController = require("./controllers/searchController");
 var imageController = require("./controllers/imageController");
 
 var port = process.env.PORT || config.getAppDefaultPort();
@@ -31,6 +32,7 @@ initController(app);
 adminController(app);
 categoryController(app);
 articleController(app);
+searchController(app);
 imageController(app);
 
 app.listen(port);
