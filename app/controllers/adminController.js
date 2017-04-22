@@ -11,8 +11,8 @@ module.exports = function (app) {
     app.get("/api/login", function (req, res) {
 
         var user = {
-            login: req.params.username,
-            password: req.params.password
+            login: req.query['username'],
+            password: req.query['password']
         }
         Users.find(user, function (err, results) {
             if (err) {

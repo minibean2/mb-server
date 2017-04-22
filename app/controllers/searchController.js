@@ -9,7 +9,7 @@ module.exports = function (app) {
      Get articles
      */
     app.get("/api/search", function (req, res) {
-        var searchKey = req.params.key;
+        var searchKey = req.query['key'];
 
         // TODO - fill in search logic
         var results = [
