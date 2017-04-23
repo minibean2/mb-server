@@ -11,7 +11,6 @@ var db = require("../config/db");
 
 // aws
 var aws = require("../config/aws");
-var s3 = aws.getS3();
 
 var initController = require("./controllers/initController");
 var adminController = require("./controllers/adminController");

@@ -1,5 +1,8 @@
 {
-  "accessKeyId": "",
-  "secretAccessKey": "",
-  "region": "ap-southeast-1"
+  "ACCESS_KEY": "",
+  "SECRET_KEY": "",
+  "REGION": "ap-southeast-1",
+  "S3_BUCKET_NAME": "arn:aws:s3:::mb-img-s3-dev-1",
+  "S3_DEFAULT_ACL": "public-read",
+  "S3_CACHE_CONTROL": "max-age=31536000"
 }
