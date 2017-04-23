@@ -85,8 +85,8 @@ module.exports = function (app) {
         articles.find({ "category.id": categoryId }, null, {
             skip: start,
             limit: limit,
-            sort:{
-                post_date: -1 
+            sort: {
+                post_date: -1
             }
         }, function (err, results) {
             if (err) {
@@ -121,29 +121,50 @@ module.exports = function (app) {
 
     });
 
-    /*Created by Vinod
-      Update featured
+    /*Created By Vinod
+      Get featured articles
     */
-    app.post("/api/update/featured", function (req, res) {
-      
-       var obj = req.body;
-       var article = obj.articles;
-       if(!article){
-          article = [];
-       }
-       articles.update({}, {featured:false}, { multi: true },
-            function(err, num) {
-                if(article.length == 0){
-                   return res.send("no record to update");
+    app.get("/api/featured-articles", function (req, res) {
+        articles.find({ "featured": true }, null, {
+            sort: {
+                post_date: -1
+            }
+        }, function (err, results) {
+            if (err) {
+                res.status(500).send(err);
+            }
+            var data = {
+                statusCode: "200",
+                res: results,
+                message: "Articles"
+            }
+            res.send(data);
+        });
+    })
+
+    /*Created by Vinod
+    Update featured
+    */
+    app.post("/api/featured-articles/update", function (req, res) {
+
+        var obj = req.body;
+        var article = obj.articles;
+        if (!article) {
+            article = [];
+        }
+        articles.update({}, { featured: false }, { multi: true },
+            function (err, num) {
+                if (article.length == 0) {
+                    return res.send("no record to update");
                 }
                 var count = article.length;
                 var length = 0;
 
-                for(var i=0;i<article.length;i++){
+                for (var i = 0; i < article.length; i++) {
                     length++;
-                    articles.update({"_id":article[i]}, {featured:true},
-                        function(err, num) {
-                    });
+                    articles.update({ "_id": article[i] }, { featured: true },
+                        function (err, num) {
+                        });
                 }
 
                 res.send("update record...");
