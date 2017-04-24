@@ -12,6 +12,9 @@ module.exports = function (app) {
         var searchKey = req.query['key'];
 
         // TODO - fill in search logic
+        var results = [];
+        
+        /*
         var results = [
             {
                 title: "miniBean Search Result 1",
@@ -29,6 +32,7 @@ module.exports = function (app) {
                 url: "http://www.minibean.hk"
             }
         ];
+        */
 
         var data = {
             statusCode: "200",
