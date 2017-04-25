@@ -75,6 +75,27 @@ module.exports = function (app) {
     });
 
     /*Created By Vinod
+        update article by id
+    */
+    app.post("/api/update/article/:articleId", function(req, res) {
+        var articleId = req.params.articleId;
+        var article = req.body;
+        articles.update({"_id":articleId}, article,function(err, num) {
+            if (err) {
+                res.status(500).send(err);
+            }
+            var data = {
+                statusCode: "200",
+                res: num,
+                message: "Article updated"
+            }
+
+            res.send(data);
+        });
+    });
+
+
+    /*Created By Vinod
      Get article by category id
      */
     app.get("/api/article/category/:categoryId", function (req, res) {
