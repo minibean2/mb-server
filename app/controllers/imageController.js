@@ -17,16 +17,18 @@ module.exports = function (app) {
         }
 
         var file = req.files.file;
+        var folder = moment(Date.now()).format("YYYYMMDD");
+        var path = aws.getS3ImagePath(folder);
+        var filePath = path + file.name;
 
-        console.log("uploading " + file.name + " to S3...");
+        console.log("Uploading image to " + awsConfig.S3_BUCKET_NAME);
+        console.log("Image: " + filePath);
         //console.log("File: " + JSON.stringify(file));
         //console.log("File: " + JSON.stringify(file, null, 4));
 
-        var path = awsConfig.S3_IMAGE_PATH + moment(Date.now()).format("YYYYMMDD") + "/" + file.name;
-
         s3.upload({
             Bucket: awsConfig.S3_BUCKET_NAME,
-            Key: path,
+            Key: filePath,
             Body: file.data,
             ACL: awsConfig.S3_DEFAULT_ACL,
         }, (err) => {
@@ -35,8 +37,20 @@ module.exports = function (app) {
                 return res.status(400).send(err);
             }
 
-            console.log("File uploaded to S3");
-            res.send("File uploaded to S3");
+            console.log("Image upload successful!");
+
+            var urlPrefix = aws.getS3UrlPrefix() + path;
+            var data = {
+                statusCode: "200",
+                res: {
+                    url: urlPrefix + file.name,
+                    url_300: urlPrefix + file.name,
+                    url_600: urlPrefix + file.name
+                },
+                message: "File uploaded to S3"
+            }
+
+            res.send(data);
         });
 
         /*

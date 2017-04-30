@@ -16,7 +16,11 @@ module.exports = Object.freeze({
   },
 
   getS3UrlPrefix: function () {
-    return awsConfig.S3_URL_PREFIX + awsConfig.S3_BUCKET_NAME;
+    return awsConfig.S3_URL_PREFIX + awsConfig.S3_BUCKET_NAME + "/";
+  },
+
+  getS3ImagePath: function (folder) {
+    return awsConfig.S3_IMAGE_PATH + folder + "/";
   },
 
   getS3: function () {
