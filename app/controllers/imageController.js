@@ -1,19 +1,47 @@
 var images = require("../models/imagesModel");
+var awsConfig = require("../../config/aws.json");
 var aws = require("../../config/aws");
 var jimp = require("jimp");
+var moment = require('moment');
 
+var s3 = aws.getS3();
 var s3Upload = aws.getS3Upload();
 
 module.exports = function (app) {
 
-    app.post('/api/image/upload2', s3Upload.array('dz-image', 1), function (req, res, next) {
-        res.send('Successfully uploaded ' + req.files.length + ' files!')
+    app.post("/api/image/upload2", s3Upload.single('imageFile'), function (req, res, next) {
+        console.log("/api/image/upload2:");
+        console.log("Uploading " + req.files.length + " files to S3");
+        res.send("Successfully uploaded " + req.file.name);
     });
 
     app.post("/api/image/upload", function (req, res) {
+        console.log("/api/image/upload:");
+
         if (!req.files) {
+            console.log("No files were uploaded...");
             return res.status(400).send('No files were uploaded.');
         }
+
+        console.log("uploading " + req.files.file.name + "...");
+        console.log("Buffer: " + req.files.file.buffer + "...");
+
+        s3.putObject({
+            Bucket: awsConfig.S3_BUCKET_NAME,
+            Key: awsConfig.S3_IMAGE_PATH + moment(Date.now()).format("YYYYMMDD") + "/" + req.files.file.name,
+            Body: req.files.file.buffer,
+            ACL: awsConfig.S3_DEFAULT_ACL,
+        }, (err) => {
+            if (err) {
+                console.log("Error: " + err.message);
+                return res.status(400).send(err);
+            }
+            console.log("File uploaded to S3");
+            res.send("File uploaded to S3");
+        });
+
+
+        /*
         let sampleFile = req.files.file;
         sampleFile.mv(__dirname + '/images/' + sampleFile.name, function (err) {
             if (err) {
@@ -47,6 +75,7 @@ module.exports = function (app) {
                 });
             });
         });
+        */
     });
 
     app.get("/images/:imageName", function (req, res) {

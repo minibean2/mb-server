@@ -27,9 +27,16 @@ app.use("/assets", express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 
 app.set('superSecret', config.getSecret());
-app.use(fileUpload());
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true ,limit: '50mb'}));
+app.use(fileUpload());
+
+// Allow CORS
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Content-Type,accept,access_token,X-Requested-With");
+    next();
+});
 
 initController(app);
 adminController(app);
