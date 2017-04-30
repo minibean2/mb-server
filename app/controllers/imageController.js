@@ -5,15 +5,8 @@ var jimp = require("jimp");
 var moment = require('moment');
 
 var s3 = aws.getS3();
-var s3Upload = aws.getS3Upload();
 
 module.exports = function (app) {
-
-    app.post("/api/image/upload2", s3Upload.single('imageFile'), function (req, res, next) {
-        console.log("/api/image/upload2:");
-        console.log("Uploading " + req.files.length + " files to S3");
-        res.send("Successfully uploaded " + req.file.name);
-    });
 
     app.post("/api/image/upload", function (req, res) {
         console.log("/api/image/upload:");
@@ -23,23 +16,28 @@ module.exports = function (app) {
             return res.status(400).send('No files were uploaded.');
         }
 
-        console.log("uploading " + req.files.file.name + "...");
-        console.log("Buffer: " + req.files.file.buffer + "...");
+        var file = req.files.file;
 
-        s3.putObject({
+        console.log("uploading " + file.name + " to S3...");
+        //console.log("File: " + JSON.stringify(file));
+        //console.log("File: " + JSON.stringify(file, null, 4));
+
+        var path = awsConfig.S3_IMAGE_PATH + moment(Date.now()).format("YYYYMMDD") + "/" + file.name;
+
+        s3.upload({
             Bucket: awsConfig.S3_BUCKET_NAME,
-            Key: awsConfig.S3_IMAGE_PATH + moment(Date.now()).format("YYYYMMDD") + "/" + req.files.file.name,
-            Body: req.files.file.buffer,
+            Key: path,
+            Body: file.data,
             ACL: awsConfig.S3_DEFAULT_ACL,
         }, (err) => {
             if (err) {
                 console.log("Error: " + err.message);
                 return res.status(400).send(err);
             }
+
             console.log("File uploaded to S3");
             res.send("File uploaded to S3");
         });
-
 
         /*
         let sampleFile = req.files.file;
