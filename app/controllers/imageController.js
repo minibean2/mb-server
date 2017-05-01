@@ -1,3 +1,4 @@
+var constants = require("../../config/constants");
 var images = require("../models/imagesModel");
 var awsConfig = require("../../config/aws.json");
 var aws = require("../../config/aws");
@@ -20,15 +21,16 @@ module.exports = function (app) {
         var imageFile = req.files.file;
         var folder = moment(Date.now()).format("YYYYMMDD");
         var path = aws.getS3ImagePath(folder);
-        var imageFilePath = path + imageFile.name;
+
+        var tokens = (imageFile.name).split(".");
+        var imageThumbName = tokens[0] + "_thumb" + "." + tokens[1];
+        var imageFullName = tokens[0] + "_full" + "." + tokens[1];
 
         console.log("Uploading image to " + awsConfig.S3_BUCKET_NAME);
-        console.log("Image: " + imageFilePath);
+        console.log("Image: " + imageFile.name);
         //console.log("imageFile: " + JSON.stringify(imageFile, null, 4));
 
-
-        /*
-        // resize to thumbnail and standard size
+        // resize to thumbnail and full size
         imageFile.mv(appRoot + '/temp/' + imageFile.name, function (err) {
             if (err) {
                 console.log(err);
@@ -41,25 +43,46 @@ module.exports = function (app) {
                     //res.status(500).send(err);
                 }
 
-                var tokens = (imageFile.name).split(".");
-                var image300 = tokens[0] + "_300" + "." + tokens[1];
-                var image600 = tokens[0] + "_600" + "." + tokens[1];
+                lenna.resize(constants.IMAGE_FULL_WIDTH, jimp.AUTO, jimp.RESIZE_BEZIER)
+                    //.quality(100)
+                    .write(appRoot + '/temp/' + imageFullName);
 
-                lenna.resize(300, 300)            // resize 
-                    .quality(100)                 // set JPEG quality    
-                    .write(appRoot + '/temp/' + image300);
+                lenna.resize(constants.IMAGE_THUMB_WIDTH, jimp.AUTO, jimp.RESIZE_BEZIER)
+                    //.quality(100)
+                    .write(appRoot + '/temp/' + imageThumbName);
 
-                lenna.resize(600, 600)            // resize 
-                    .quality(100)                 // set JPEG quality    
-                    .write(appRoot + '/temp/' + image600);
+                //console.log("lenna: " + JSON.stringify(lenna, null, 4));
+                //console.log("lenna: " + JSON.stringify(lenna));
+            });
+        });
+
+        // upload image full
+        /*
+        jimp.read(appRoot + '/temp/' + imageFullName, function (err, lenna) {
+            if (err) {
+                console.log(err);
+                //res.status(500).send(err);
+            }
+
+            s3.upload({
+                Bucket: awsConfig.S3_BUCKET_NAME,
+                Key: path + imageFullName,
+                Body: lenna.buffer,
+                ACL: awsConfig.S3_DEFAULT_ACL,
+            }, (err) => {
+                if (err) {
+                    console.log("Error: " + err.message);
+                    return res.status(400).send(err);
+                }
+
+                console.log("ImageFull upload successful");
             });
         });
         */
 
-
         s3.upload({
             Bucket: awsConfig.S3_BUCKET_NAME,
-            Key: imageFilePath,
+            Key: path + imageFile.name,
             Body: imageFile.data,
             ACL: awsConfig.S3_DEFAULT_ACL,
         }, (err) => {
@@ -69,19 +92,19 @@ module.exports = function (app) {
             }
 
             console.log("Image upload successful");
-
-            var urlPrefix = aws.getS3UrlPrefix() + path;
-            var data = {
-                statusCode: "200",
-                res: {
-                    url_300: urlPrefix + imageFile.name,
-                    url_600: urlPrefix + imageFile.name
-                },
-                message: "Image upload successful"
-            };
-
-            res.send(data);
         });
+
+        var urlPrefix = aws.getS3UrlPrefix() + path;
+        var data = {
+            statusCode: "200",
+            res: {
+                url_thumb: urlPrefix + imageThumbName,
+                url_full: urlPrefix + imageFullName
+            },
+            message: "Image upload successful"
+        };
+
+        res.send(data);
     });
 
     app.get("/images/:imageName", function (req, res) {
