@@ -15,7 +15,7 @@ module.exports = function (app) {
 
         if (!req.files) {
             console.log("No files were uploaded...");
-            return res.status(400).send('No files were uploaded.');
+            return res.status(400).send("No files were uploaded...");
         }
 
         var imageFile = req.files.file;
@@ -23,63 +23,85 @@ module.exports = function (app) {
         var path = aws.getS3ImagePath(folder);
 
         var tokens = (imageFile.name).split(".");
-        var imageThumbName = tokens[0] + "_thumb" + "." + tokens[1];
-        var imageFullName = tokens[0] + "_full" + "." + tokens[1];
+        var imageThumbName = tokens[0] + "_thumb.jpg";
+        var imageFullName = tokens[0] + "_full.jpg";
 
         console.log("Uploading image to " + awsConfig.S3_BUCKET_NAME);
         console.log("Image: " + imageFile.name);
+        console.log(imageFile);
+
         //console.log("imageFile: " + JSON.stringify(imageFile, null, 4));
 
-        // resize to thumbnail and full size
+        // make a copy of original image
         imageFile.mv(appRoot + '/temp/' + imageFile.name, function (err) {
             if (err) {
                 console.log(err);
                 //return res.status(500).send(err);
             }
 
+            // read and resize to thumb size image
             jimp.read(appRoot + '/temp/' + imageFile.name, function (err, lenna) {
-                if (err) {
-                    console.log(err);
-                    //res.status(500).send(err);
-                }
-
-                lenna.resize(constants.IMAGE_FULL_WIDTH, jimp.AUTO, jimp.RESIZE_BEZIER)
-                    //.quality(100)
-                    .write(appRoot + '/temp/' + imageFullName);
+                if (err) throw err
 
                 lenna.resize(constants.IMAGE_THUMB_WIDTH, jimp.AUTO, jimp.RESIZE_BEZIER)
-                    //.quality(100)
-                    .write(appRoot + '/temp/' + imageThumbName);
+                    .quality(constants.IMAGE_JPEG_QUALITY)
+                    .write(appRoot + '/temp/' + imageThumbName)
+                    .getBuffer(jimp.MIME_JPEG, function (err, buffer) {
+                        if (err) throw err
 
-                //console.log("lenna: " + JSON.stringify(lenna, null, 4));
-                //console.log("lenna: " + JSON.stringify(lenna));
+                        // upload to s3
+                        s3.upload({
+                            Bucket: awsConfig.S3_BUCKET_NAME,
+                            Key: path + imageThumbName,
+                            Body: buffer,
+                            ACL: awsConfig.S3_DEFAULT_ACL,
+                        }, (err) => {
+                            if (err) {
+                                console.log("Error: " + err.message);
+                                return res.status(400).send(err);
+                            }
+
+                            console.log("ImageThumb uploaded successfully");
+                        });
+
+                        console.log("ImageThumb:");
+                        console.log(buffer);
+                    });
+            });
+
+            // read and resize to full size image
+            jimp.read(appRoot + '/temp/' + imageFile.name, function (err, lenna) {
+                if (err) throw err
+
+                lenna.resize(constants.IMAGE_FULL_WIDTH, jimp.AUTO, jimp.RESIZE_BEZIER)
+                    .quality(constants.IMAGE_JPEG_QUALITY)
+                    .write(appRoot + '/temp/' + imageFullName)
+                    .getBuffer(jimp.MIME_JPEG, function (err, buffer) {
+                        if (err) throw err
+
+                        // upload to s3
+                        s3.upload({
+                            Bucket: awsConfig.S3_BUCKET_NAME,
+                            Key: path + imageFullName,
+                            Body: buffer,
+                            ACL: awsConfig.S3_DEFAULT_ACL,
+                        }, (err) => {
+                            if (err) {
+                                console.log("Error: " + err.message);
+                                return res.status(400).send(err);
+                            }
+
+                            console.log("ImageFull uploaded successfully");
+                        });
+
+                        console.log("ImageFull:");
+                        console.log(buffer);
+                    });
             });
         });
 
-        // upload image full
         /*
-        jimp.read(appRoot + '/temp/' + imageFullName, function (err, lenna) {
-            if (err) {
-                console.log(err);
-                //res.status(500).send(err);
-            }
-
-            s3.upload({
-                Bucket: awsConfig.S3_BUCKET_NAME,
-                Key: path + imageFullName,
-                Body: lenna.buffer,
-                ACL: awsConfig.S3_DEFAULT_ACL,
-            }, (err) => {
-                if (err) {
-                    console.log("Error: " + err.message);
-                    return res.status(400).send(err);
-                }
-
-                console.log("ImageFull upload successful");
-            });
-        });
-        */
-
+        // upload to s3
         s3.upload({
             Bucket: awsConfig.S3_BUCKET_NAME,
             Key: path + imageFile.name,
@@ -91,8 +113,9 @@ module.exports = function (app) {
                 return res.status(400).send(err);
             }
 
-            console.log("Image upload successful");
+            console.log("Image uploaded successfully");
         });
+        */
 
         var urlPrefix = aws.getS3UrlPrefix() + path;
         var data = {
@@ -101,7 +124,7 @@ module.exports = function (app) {
                 url_thumb: urlPrefix + imageThumbName,
                 url_full: urlPrefix + imageFullName
             },
-            message: "Image upload successful"
+            message: "Image uploaded successfully"
         };
 
         res.send(data);
