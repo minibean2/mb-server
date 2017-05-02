@@ -36,9 +36,9 @@ module.exports = function (app) {
      Get article by id
      */
     app.get("/api/article", function (req, res) {
-        console.log("/api/article: articleId=" + req.query['articleId']);
+        console.log("/api/article: id=" + req.query['id']);
         
-        articles.findById(req.query['articleId'], function (err, result) {
+        articles.findById(req.query['id'], function (err, result) {
             if (err) {
                 res.status(500).send(err);
             }
@@ -79,8 +79,8 @@ module.exports = function (app) {
     /*Created By Vinod
         update article by id
     */
-    app.post("/api/article/update/:articleId", function (req, res) {
-        var articleId = req.params.articleId;
+    app.post("/api/article/update/:id", function (req, res) {
+        var articleId = req.params.id;
         var article = req.body;
         articles.update({ "_id": articleId }, article, function (err, num) {
             if (err) {
@@ -127,8 +127,8 @@ module.exports = function (app) {
     /*Created By Vinod
      Delete article by id
      */
-    app.get("/api/article/delete/:articleId", function (req, res) {
-        var articleId = req.params.articleId;
+    app.get("/api/article/delete/:id", function (req, res) {
+        var articleId = req.params.id;
 
         articles.remove({ "_id": articleId }, function (err, result) {
             if (err) {
