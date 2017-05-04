@@ -33,19 +33,19 @@ module.exports = function (app) {
         //console.log("imageFile: " + JSON.stringify(imageFile, null, 4));
 
         // make a copy of original image
-        imageFile.mv(appRoot + '/temp/' + imageFile.name, function (err) {
+        imageFile.mv(appRoot + "/" + constants.IMAGE_TEMP_UPLOAD_DIR + imageFile.name, function (err) {
             if (err) {
                 console.log(err);
                 //return res.status(500).send(err);
             }
 
             // read and resize to thumb size image
-            jimp.read(appRoot + '/temp/' + imageFile.name, function (err, lenna) {
+            jimp.read(appRoot + "/" + constants.IMAGE_TEMP_UPLOAD_DIR + imageFile.name, function (err, lenna) {
                 if (err) throw err
 
                 lenna.resize(constants.IMAGE_THUMB_WIDTH, jimp.AUTO, jimp.RESIZE_BEZIER)
                     .quality(constants.IMAGE_JPEG_QUALITY)
-                    .write(appRoot + '/temp/' + imageThumbName)
+                    .write(appRoot + "/" + constants.IMAGE_TEMP_UPLOAD_DIR + imageThumbName)
                     .getBuffer(jimp.MIME_JPEG, function (err, buffer) {
                         if (err) throw err
 
@@ -70,12 +70,12 @@ module.exports = function (app) {
             });
 
             // read and resize to full size image
-            jimp.read(appRoot + '/temp/' + imageFile.name, function (err, lenna) {
+            jimp.read(appRoot + "/" + constants.IMAGE_TEMP_UPLOAD_DIR + imageFile.name, function (err, lenna) {
                 if (err) throw err
 
                 lenna.resize(constants.IMAGE_FULL_WIDTH, jimp.AUTO, jimp.RESIZE_BEZIER)
                     .quality(constants.IMAGE_JPEG_QUALITY)
-                    .write(appRoot + '/temp/' + imageFullName)
+                    .write(appRoot + "/" + constants.IMAGE_TEMP_UPLOAD_DIR + imageFullName)
                     .getBuffer(jimp.MIME_JPEG, function (err, buffer) {
                         if (err) throw err
 
