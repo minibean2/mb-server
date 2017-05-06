@@ -1,5 +1,4 @@
 var dbConfig = require("./db.json");
-
 module.exports = Object.freeze({
 
     getDbConnectionString: function() {

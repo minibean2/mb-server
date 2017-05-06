@@ -1,8 +1,16 @@
 var express = require("express");
 var cors = require('cors')
 var app = express();
+const env = require('get-env')();
+var config ="";
+if (env === 'dev') {
+	console.log("Running in Dev mode");
+   config = require("../config/config_dev");
+} else { 
+	console.log("Running in Prod mode");
+   config = require("../config/config_prod");
+}
 
-var config = require("../config/config");
 var bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 
