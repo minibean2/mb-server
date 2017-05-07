@@ -1,5 +1,12 @@
-var awsConfig = require("../config/aws.json");
+const env = require('get-env')();
 var awsSDK = require('aws-sdk');
+
+var awsConfig = "";
+if (env === 'dev') {
+  awsConfig = require("../config/aws_dev.json");
+} else {
+  awsConfig = require("../config/aws_prod.json");
+}
 
 awsSDK.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY || awsConfig.ACCESS_KEY,
@@ -10,6 +17,14 @@ awsSDK.config.update({
 var s3 = new awsSDK.S3();
 
 module.exports = Object.freeze({
+
+  getS3BucketName: function () {
+    return awsConfig.S3_BUCKET_NAME;
+  },
+
+  getS3DefaultAcl: function () {
+    return awsConfig.S3_DEFAULT_ACL;
+  },
 
   getSDK: function () {
     return awsSDK;

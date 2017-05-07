@@ -1,7 +1,14 @@
+const env = require('get-env')();
 var users = require("../models/userModel");
 var categories = require("../models/categoryModel");
-var config = require("../../config/config");
 var constants = require("../../config/constants");
+
+var config = "";
+if (env === 'dev') {
+    config = require("../../config/config_dev");
+} else {
+    config = require("../../config/config_prod");
+}
 
 module.exports = function (app) {
 

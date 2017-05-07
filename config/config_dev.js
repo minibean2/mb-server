@@ -1,15 +1,10 @@
-var dbConfig = require("./db.json");
 module.exports = Object.freeze({
 
-    getDbConnectionString: function() {
-        return "mongodb://" + dbConfig.username + ":" + dbConfig.password + "@" + dbConfig.url + "/" + dbConfig.name;
+    getSecret: function () {
+        return "mbToken";
     },
 
-    getSecret : function() {
-    	return "mbToken";
-    },
-
-    getAppDefaultPort : function() {
+    getAppDefaultPort: function () {
         return 9000;
     },
 

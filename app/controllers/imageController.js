@@ -1,6 +1,5 @@
 var constants = require("../../config/constants");
 var images = require("../models/imagesModel");
-var awsConfig = require("../../config/aws.json");
 var aws = require("../../config/aws");
 var jimp = require("jimp");
 var moment = require('moment');
@@ -26,7 +25,7 @@ module.exports = function (app) {
         var imageThumbName = tokens[0] + "_thumb.jpg";
         var imageFullName = tokens[0] + "_full.jpg";
 
-        console.log("Uploading image to " + awsConfig.S3_BUCKET_NAME);
+        console.log("Uploading image to " + aws.getS3BucketName());
         console.log("Image: " + imageFile.name);
         console.log(imageFile);
 
@@ -51,10 +50,10 @@ module.exports = function (app) {
 
                         // upload to s3
                         s3.upload({
-                            Bucket: awsConfig.S3_BUCKET_NAME,
+                            Bucket: aws.getS3BucketName(),
                             Key: path + imageThumbName,
                             Body: buffer,
-                            ACL: awsConfig.S3_DEFAULT_ACL,
+                            ACL: aws.getS3DefaultAcl(),
                         }, (err) => {
                             if (err) {
                                 console.log("Error: " + err.message);
@@ -81,10 +80,10 @@ module.exports = function (app) {
 
                         // upload to s3
                         s3.upload({
-                            Bucket: awsConfig.S3_BUCKET_NAME,
+                            Bucket: aws.getS3BucketName(),
                             Key: path + imageFullName,
                             Body: buffer,
-                            ACL: awsConfig.S3_DEFAULT_ACL,
+                            ACL: aws.getS3DefaultAcl(),
                         }, (err) => {
                             if (err) {
                                 console.log("Error: " + err.message);
@@ -103,10 +102,10 @@ module.exports = function (app) {
         /*
         // upload to s3
         s3.upload({
-            Bucket: awsConfig.S3_BUCKET_NAME,
+            Bucket: aws.getS3BucketName(),
             Key: path + imageFile.name,
             Body: imageFile.data,
-            ACL: awsConfig.S3_DEFAULT_ACL,
+            ACL: aws.getS3DefaultAcl(),
         }, (err) => {
             if (err) {
                 console.log("Error: " + err.message);

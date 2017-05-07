@@ -1,14 +1,15 @@
+const env = require('get-env')();
 var express = require("express");
 var cors = require('cors')
 var app = express();
-const env = require('get-env')();
-var config ="";
+
+var config = "";
 if (env === 'dev') {
-	console.log("Running in Dev mode");
-   config = require("../config/config_dev");
-} else { 
-	console.log("Running in Prod mode");
-   config = require("../config/config_prod");
+    console.log("Running in Dev mode");
+    config = require("../config/config_dev");
+} else {
+    console.log("Running in Prod mode");
+    config = require("../config/config_prod");
 }
 
 var bodyParser = require('body-parser');
@@ -16,6 +17,8 @@ const fileUpload = require('express-fileupload');
 
 // database
 var db = require("../config/db");
+var mongoose = require("mongoose");
+mongoose.connect(db.getDbConnectionString());
 
 // aws
 var aws = require("../config/aws");

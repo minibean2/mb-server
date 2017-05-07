@@ -1,10 +1,16 @@
 const env = require('get-env')();
-var mongoose = require("mongoose");
-var config = "";
+
+var dbConfig = "";
 if (env === 'dev') {
-	config = require("../config/config_dev");
-}else{
-	config = require("../config/config_prod");
+	dbConfig = require("../config/db_dev");
+} else {
+	dbConfig = require("../config/db_prod");
 }
 
-mongoose.connect(config.getDbConnectionString());
+module.exports = Object.freeze({
+
+	getDbConnectionString: function () {
+		return "mongodb://" + dbConfig.username + ":" + dbConfig.password + "@" + dbConfig.url + "/" + dbConfig.name;
+	}
+
+});

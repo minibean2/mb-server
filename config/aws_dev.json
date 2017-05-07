@@ -2,7 +2,7 @@
   "ACCESS_KEY": "",
   "SECRET_KEY": "",
   "REGION": "ap-southeast-1",
-  "S3_BUCKET_NAME": "mb-img-s3-dev-1",
+  "S3_BUCKET_NAME": "",
   "S3_DEFAULT_ACL": "public-read",
   "S3_IMAGE_PATH": "images/",
   "S3_CACHE_CONTROL": "max-age=31536000",
