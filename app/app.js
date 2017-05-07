@@ -4,12 +4,12 @@ var cors = require('cors')
 var app = express();
 
 var config = "";
-if (env === 'dev') {
-    console.log("Running in Dev mode");
-    config = require("../config/config_dev");
-} else {
+if (env === 'prod') {
     console.log("Running in Prod mode");
     config = require("../config/config_prod");
+} else {
+    console.log("Running in Dev mode");
+    config = require("../config/config_dev");
 }
 
 var bodyParser = require('body-parser');

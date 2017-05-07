@@ -2,10 +2,10 @@ const env = require('get-env')();
 var awsSDK = require('aws-sdk');
 
 var awsConfig = "";
-if (env === 'dev') {
-  awsConfig = require("../config/aws_dev.json");
-} else {
+if (env === 'prod') {
   awsConfig = require("../config/aws_prod.json");
+} else {
+  awsConfig = require("../config/aws_dev.json");
 }
 
 awsSDK.config.update({

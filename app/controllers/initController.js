@@ -4,10 +4,10 @@ var categories = require("../models/categoryModel");
 var constants = require("../../config/constants");
 
 var config = "";
-if (env === 'dev') {
-    config = require("../../config/config_dev");
-} else {
+if (env === 'prod') {
     config = require("../../config/config_prod");
+} else {
+    config = require("../../config/config_dev");
 }
 
 module.exports = function (app) {

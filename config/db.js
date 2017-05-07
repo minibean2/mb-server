@@ -1,10 +1,10 @@
 const env = require('get-env')();
 
 var dbConfig = "";
-if (env === 'dev') {
-	dbConfig = require("../config/db_dev");
-} else {
+if (env === 'prod') {
 	dbConfig = require("../config/db_prod");
+} else {
+	dbConfig = require("../config/db_dev");
 }
 
 module.exports = Object.freeze({
