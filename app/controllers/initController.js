@@ -23,8 +23,8 @@ module.exports = function (app) {
             if (!err && count === 0) {
                 var adminUsers = [
                     {
-                        login: "admin",
-                        password: "admin",
+                        login: "mb-admin",
+                        password: "mb-admin",
                         lastname: "admin",
                         firstname: "minibean",
                         email: "",
