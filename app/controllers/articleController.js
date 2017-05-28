@@ -11,9 +11,16 @@ module.exports = function (app) {
      Get articles
      */
     app.get("/api/articles", function (req, res) {
+        var all = req.query['all'] == 'true';
         var start = parseInt(req.query['start']);
         var limit = parseInt(req.query['limit']);
-        articles.find({}, null, {
+
+        var predicate = { "published": true };
+        if (all) {
+            predicate = {};
+        }
+
+        articles.find(predicate, null, {
             skip: start,
             limit: limit,
             sort: {
@@ -105,7 +112,7 @@ module.exports = function (app) {
         var limit = parseInt(req.query['limit']);
         var categoryId = req.params.categoryId;
 
-        articles.find({ "category.id": categoryId }, null, {
+        articles.find({ "published": true, "category.id": categoryId }, null, {
             skip: start,
             limit: limit,
             sort: {
@@ -148,7 +155,7 @@ module.exports = function (app) {
       Get featured articles
     */
     app.get("/api/featured-articles", function (req, res) {
-        articles.find({ "featured": true }, null, {
+        articles.find({ "published": true, "featured": true }, null, {
             sort: {
                 post_date: -1
             }
