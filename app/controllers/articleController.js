@@ -43,7 +43,7 @@ module.exports = function (app) {
      Get article by id
      */
     app.get("/api/article", function (req, res) {
-        console.log("/api/article: id=" + req.query['id']);
+        //console.log("/api/article: id=" + req.query['id']);
         
         articles.findById(req.query['id'], function (err, result) {
             if (err) {
