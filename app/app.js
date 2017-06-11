@@ -1,5 +1,6 @@
 const env = require('get-env')();
-var express = require("express");
+var express = require('express');
+var path = require('path');
 var cors = require('cors')
 var app = express();
 
@@ -42,6 +43,11 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json());
 app.use(fileUpload());
 
+//app.get('*', function (req, res) {
+    //res.sendFile(path.join(__dirname + '/index.html'));
+    //res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+//});
+
 // Allow CORS
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -57,4 +63,4 @@ searchController(app);
 imageController(app);
 
 app.listen(port);
-
+console.log("server started on port " + port)
