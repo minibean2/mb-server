@@ -27,7 +27,7 @@ module.exports = function (app) {
                 post_date: -1
             }
         }, function (err, results) {
-            if (err || !result || result == null || typeof result === 'undefined') {
+            if (err || !results || results == null || typeof results === 'undefined') {
                 res.status(500).send(err);
             } else {
                 var data = {
@@ -92,7 +92,7 @@ module.exports = function (app) {
         var articleId = req.params.id;
         var article = req.body;
         articles.update({ "_id": articleId }, article, function (err, num) {
-            if (err || !result || result == null || typeof result === 'undefined') {
+            if (err || !num || num == null || typeof num === 'undefined') {
                 res.status(500).send(err);
             } else {
                 var data = {
@@ -121,7 +121,7 @@ module.exports = function (app) {
                 post_date: -1
             }
         }, function (err, results) {
-            if (err || !result || result == null || typeof result === 'undefined') {
+            if (err || !results || results == null || typeof results === 'undefined') {
                 res.status(500).send(err);
             } else {
                 var data = {
@@ -164,7 +164,7 @@ module.exports = function (app) {
                 post_date: -1
             }
         }, function (err, results) {
-            if (err || !result || result == null || typeof result === 'undefined') {
+            if (err || !results || results == null || typeof results === 'undefined') {
                 res.status(500).send(err);
             } else {
                 var data = {
@@ -201,7 +201,6 @@ module.exports = function (app) {
                         function (err, num) {
                         });
                 }
-
                 res.send("update record...");
             });
     });
