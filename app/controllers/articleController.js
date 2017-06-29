@@ -27,15 +27,16 @@ module.exports = function (app) {
                 post_date: -1
             }
         }, function (err, results) {
-            if (err) {
+            if (err || !result || result == null || typeof result === 'undefined') {
                 res.status(500).send(err);
+            } else {
+                var data = {
+                    statusCode: "200",
+                    res: results,
+                    message: "Articles"
+                }
+                res.send(data);
             }
-            var data = {
-                statusCode: "200",
-                res: results,
-                message: "Articles"
-            }
-            res.send(data);
         });
     })
 
@@ -43,19 +44,20 @@ module.exports = function (app) {
      Get article by id
      */
     app.get("/api/article", function (req, res) {
-        //console.log("/api/article: id=" + req.query['id']);
-        
-        articles.findById(req.query['id'], function (err, result) {
-            if (err) {
-                res.status(500).send(err);
-            }
-            var data = {
-                statusCode: "200",
-                res: result,
-                message: "Article"
-            }
+        console.log("/api/article: id=" + req.query['id']);
 
-            res.send(data);
+        articles.findById(req.query['id'], function (err, result) {
+            if (err || !result || result == null || typeof result === 'undefined') {
+                console.log("   result=" + result);
+                res.status(500).send(err);
+            } else {
+                var data = {
+                    statusCode: "200",
+                    res: result,
+                    message: "Article"
+                }
+                res.send(data);
+            }
         });
     });
 
@@ -70,16 +72,16 @@ module.exports = function (app) {
         }
 
         articles.create(article, function (err, result) {
-            if (err) {
+            if (err || !result || result == null || typeof result === 'undefined') {
                 res.status(500).send(err);
+            } else {
+                var data = {
+                    statusCode: "200",
+                    res: result,
+                    message: "Article"
+                }
+                res.send(data);
             }
-            var data = {
-                statusCode: "200",
-                res: result,
-                message: "Article"
-            }
-
-            res.send(data);
         });
     });
 
@@ -90,16 +92,16 @@ module.exports = function (app) {
         var articleId = req.params.id;
         var article = req.body;
         articles.update({ "_id": articleId }, article, function (err, num) {
-            if (err) {
+            if (err || !result || result == null || typeof result === 'undefined') {
                 res.status(500).send(err);
+            } else {
+                var data = {
+                    statusCode: "200",
+                    res: num,
+                    message: "Article updated"
+                }
+                res.send(data);
             }
-            var data = {
-                statusCode: "200",
-                res: num,
-                message: "Article updated"
-            }
-
-            res.send(data);
         });
     });
 
@@ -119,15 +121,16 @@ module.exports = function (app) {
                 post_date: -1
             }
         }, function (err, results) {
-            if (err) {
+            if (err || !result || result == null || typeof result === 'undefined') {
                 res.status(500).send(err);
+            } else {
+                var data = {
+                    statusCode: "200",
+                    res: results,
+                    message: "Article by category id"
+                }
+                res.send(data);
             }
-            var data = {
-                statusCode: "200",
-                res: results,
-                message: "Article by category id"
-            }
-            res.send(data);
         });
     });
 
@@ -138,15 +141,16 @@ module.exports = function (app) {
         var articleId = req.params.id;
 
         articles.remove({ "_id": articleId }, function (err, result) {
-            if (err) {
+            if (err || !result || result == null || typeof result === 'undefined') {
                 res.status(500).send(err);
+            } else {
+                var data = {
+                    statusCode: "200",
+                    res: result,
+                    message: "delete article"
+                }
+                res.send(data);
             }
-            var data = {
-                statusCode: "200",
-                res: result,
-                message: "delete article"
-            }
-            res.send(data);
         });
 
     });
@@ -160,15 +164,16 @@ module.exports = function (app) {
                 post_date: -1
             }
         }, function (err, results) {
-            if (err) {
+            if (err || !result || result == null || typeof result === 'undefined') {
                 res.status(500).send(err);
+            } else {
+                var data = {
+                    statusCode: "200",
+                    res: results,
+                    message: "Articles"
+                }
+                res.send(data);
             }
-            var data = {
-                statusCode: "200",
-                res: results,
-                message: "Articles"
-            }
-            res.send(data);
         });
     })
 
