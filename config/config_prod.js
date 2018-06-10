@@ -8,5 +8,5 @@ module.exports = Object.freeze({
         return 9000;
     },
 
-    IMAGE_BASE_URL: "http://www.minibean.com.hk/images/"
+    IMAGE_BASE_URL: "https://www.minibean.com.hk/images/"
 });
